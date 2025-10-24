@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>AR.js iPhone & Desktop mit GitHub-Modell</title>
+<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<style>
+body { margin: 0; overflow: hidden; }
+#instructions {
+position: absolute;
+top: 10px; left: 50%;
+transform: translateX(-50%);
+color: white;
+font-family: sans-serif;
+background: rgba(0,0,0,0.5);
+padding: 10px;
+border-radius: 8px;
+z-index: 999;
+}
+</style>
+</head>
+<body>
+<div id="instructions">Tippe einmal auf den Bildschirm (iPhone) oder erlaube Webcam (Desktop) und halte den Hiro Marker vor die Kamera</div>
+
+
+<a-scene
+embedded
+vr-mode-ui="enabled: false"
+arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+
+
+<!-- Marker -->
+<a-marker preset="hiro">
+<a-entity
+gltf-model="url(https://franzmartensid.github.io/Franz-Fridolin/board-handle.gltf)"
+scale="0.002 0.002 0.002"
+position="0 0 0"
+rotation="0 0 0">
+</a-entity>
+</a-marker>
+
+
+<!-- Kamera -->
+<a-entity camera></a-entity>
+</a-scene>
+
+
+<script>
+// Desktop-Check für Kamera-Zugriff
+document.addEventListener('DOMContentLoaded', () => {
+if (AFRAME.utils.device.isMobile() === false) {
+alert('Bitte Webcam freigeben, damit AR-Modell angezeigt wird');
+}
+});
+</script>
+</body>
+</html>
